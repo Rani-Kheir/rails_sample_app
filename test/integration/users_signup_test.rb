@@ -26,8 +26,14 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'users/show'
+    
+    #exercise in chapter 7
     assert_select 'div.alert-success', {text: "Welcome to the Sample App, Hooman!"}
     #assert_match 'Welcome to the Sample App, Hooman!' #this failed
     assert_not flash.empty?
+
+    #continuing chapter 8
+    assert is_logged_in?
+    
   end
 end
