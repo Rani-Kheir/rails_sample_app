@@ -1,3 +1,7 @@
+# The only method on here, which is gravatar_for, will be
+# used in app/views/users/show.html.erb ... I think!
+# It was the only place I found gravatar_for (non-log)
+
 module UsersHelper
 
   # Returns the Gravatar for the given user.
