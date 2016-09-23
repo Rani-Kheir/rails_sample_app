@@ -19,4 +19,12 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
       assert_match micropost.content, response.body
     end
   end
+
+  test "testing_stats_on_home_page" do
+    get user_path(@user)
+    assert_select 'div.stats', count: 1
+    assert_select 'strong#following', count: 1
+    assert_select 'strong#followers', count: 1
+    # cause it's the same fragment?
+  end
 end

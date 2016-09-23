@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
 
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
+                                        :following, :followers] ## To control who can see content when they are logged in
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
-  # If that ^  is commented, test for admin only delete fails
+  # Comment that ^ to trigger a fail for testing 'admin only delete'
 
   def index
     #@users = User.all
@@ -59,8 +60,22 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  # Private methods
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
 
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+
+  ## Private methods
   private
     def user_params
       params.require(:user).permit(:name, :email, :password,
