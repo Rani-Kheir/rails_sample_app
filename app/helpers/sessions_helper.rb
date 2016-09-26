@@ -1,6 +1,6 @@
 # This will be used by the sessions controller that
 # is in app/controllerssessions_controller.rb
-# ... I think!
+# ... I think! ... Naa I'm sure now.
 
 module SessionsHelper
 
@@ -26,7 +26,7 @@ module SessionsHelper
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.signed[:user_id])
-      #raise       # The tests still pass, so this branch is currently untested.
+      #raise       # The tests still pass, so this branch is currently untested. (use of raise)
       user = User.find_by(id: user_id)
       if user && user.authenticated?(:remember, cookies[:remember_token])
         log_in user
